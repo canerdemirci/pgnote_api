@@ -6,7 +6,9 @@ var pool;
 
 if (process.env.DATABASE_URL) {
     pool = new Pool({
-        ssl: true,
+        ssl: {
+            rejectUnauthorized: false,
+        },
         connectionString: process.env.DATABASE_URL
     });
 } else {
