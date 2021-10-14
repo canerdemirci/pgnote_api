@@ -12,4 +12,9 @@ app.use(express.json());
 
 app.use('/note', require('./routes/note'), (req, res) => res.status(500).send('Internal server error'));
 
+if (process.env.PRODUCTION) {
+    app.use(express.static(__dirname + '/public/'));
+    app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'));
+}
+
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
