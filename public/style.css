@@ -151,6 +151,28 @@ input, textarea {
         font-size: .9rem;
     }
 
+.note-card-add-button {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem; 
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, .3);
+    transition: all .5s; 
+}
+
+    .note-card-add-button {
+        display: block;
+        cursor: pointer;
+        border-radius: 50%;
+        background-color: #fff;
+        border: 3px dotted #7e7e7e;
+        padding: 1rem;
+    }
+
+    .note-card-add-button:hover {
+        opacity: .6;
+        transform: scale(1.2);
+    }
+
 .note-delete-btn {
     padding: .5rem;
     display: none;
