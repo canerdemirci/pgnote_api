@@ -187,6 +187,17 @@ input, textarea {
         background-color: #fff;
     }
 
+.notes-completed-icon {
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}
+    .notes-completed-icon span {
+        font-size: 72px;
+        color: rgb(2, 131, 2);
+    }
+
 .color-select-button {
     margin: .3rem;
     outline: none;
