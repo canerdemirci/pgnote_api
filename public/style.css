@@ -195,7 +195,7 @@ input, textarea {
 }
     .notes-completed-icon span {
         font-size: 72px;
-        color: rgb(2, 131, 2);
+        color: #03e503;
     }
 
 .color-select-button {
