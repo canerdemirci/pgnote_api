@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const notesTable = require('../database/models/notes');
 
-const NOTES_LINIT = 20;
-
 function mapNote(note) {
     return {
         id: note.note_id,
@@ -33,11 +31,11 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-router.get('/page/:page', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
-        const { page } = req.params;
+        const { page, limit } = req.query;
 
-        let notes = await notesTable.getAll(NOTES_LINIT, (page - 1) * NOTES_LINIT);
+        let notes = await notesTable.getAll(limit, (page - 1) * limit);
 
         if (notes)
             notes = notes.map(n => mapNote(n));
