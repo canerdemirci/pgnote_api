@@ -33,9 +33,14 @@ router.get('/:id', async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
     try {
-        const { page, limit } = req.query;
+        const { page, limit, like } = req.query;
 
-        let notes = await notesTable.getAll(limit, (page - 1) * limit);
+        let notes = null;
+
+        if (!like)
+            notes = await notesTable.getAll(limit, (page - 1) * limit);
+        else
+            notes = await notesTable.search(like);
 
         if (notes)
             notes = notes.map(n => mapNote(n));

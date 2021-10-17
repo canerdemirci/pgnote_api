@@ -38,9 +38,22 @@ module.exports = {
         return note.rows[0];
     },
     getAll: async function(limit, offset) {
-        let query = `SELECT * FROM ${this.name} ORDER BY ${this.columns.createdAt.name} DESC LIMIT $1 OFFSET $2`;
+        let query = `SELECT * FROM ${this.name} 
+            ORDER BY ${this.columns.createdAt.name} DESC LIMIT $1 OFFSET $2`;
 
         const notes = await db.query(query, [limit, offset]);
+
+        if (notes.rowCount < 1)
+            return null;
+        
+        return notes.rows;
+    },
+    search: async function(like) {
+        let query = `SELECT * FROM ${this.name} 
+            WHERE ${this.columns.title.name} LIKE '%${like}%' 
+            OR ${this.columns.description.name} LIKE '%${like}%'`;
+
+        const notes = await db.query(query);
 
         if (notes.rowCount < 1)
             return null;
