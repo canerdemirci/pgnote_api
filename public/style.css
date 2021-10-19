@@ -24,6 +24,8 @@ input, textarea {
     font-size: 1rem;
 }
 
+/* ----------------------------------------------------------------- */
+
 .btn-disabled {
     opacity: .4;
 }
@@ -47,22 +49,6 @@ input, textarea {
             display: block;
             padding: .2rem;
         }
-
-.more-button {
-    padding: 1rem;
-    border-radius: 5px;
-    display: block;
-    width: 10rem;
-    margin: 1rem auto;
-    cursor: pointer;
-}
-    .more-button:hover {
-        opacity: .6;
-    }
-
-    .more-button span {
-        font-size: 48px;
-    }
 
 .fade-in-anim-2s, .fade-in-anim-1s, .fade-in-anim-500ms {
     animation: notecardfadein;
@@ -98,24 +84,9 @@ input, textarea {
     z-index: 99;
 }
 
-.note-editform-container {
-    background-color: #fff;
-    padding: 1rem;
-    border-radius: 5px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    margin: 15vh 25vw;
-}
+/* ----------------------------------------------------------------- */
 
-.note-edit-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 50vw;
-    height: 70vh;
-}
-
+/* Note Grid */
 .note-grid {
     margin: 2rem;
     display: grid;
@@ -123,6 +94,7 @@ input, textarea {
     gap: 2rem 3rem;
 }
 
+/* Note Card */
 .note-card {
     height: 10rem;
     cursor: pointer;
@@ -159,73 +131,7 @@ input, textarea {
         font-size: .9rem;
     }
 
-.note-card-add-button {
-    position: fixed;
-    right: 2rem;
-    bottom: 2rem; 
-    box-shadow: 0 0 10px 1px rgba(0, 0, 0, .3);
-    transition: all .5s; 
-}
-
-    .note-card-add-button {
-        display: block;
-        cursor: pointer;
-        border-radius: 50%;
-        background-color: #fff;
-        border: 3px dotted #7e7e7e;
-        padding: 1rem;
-    }
-
-    .note-card-add-button:hover {
-        opacity: .6;
-        transform: scale(1.2);
-    }
-
-.note-delete-btn {
-    padding: .5rem;
-    display: none;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, .3);
-    cursor: pointer;
-    position: absolute;
-    right: .5rem;
-    top: .5rem;
-}
-    .note-delete-btn:hover {
-        background-color: #fff;
-    }
-
-.notes-completed-icon {
-    text-align: center;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-}
-    .notes-completed-icon span {
-        font-size: 72px;
-        color: #03e503;
-    }
-
-.color-select-button {
-    margin: .3rem;
-    outline: none;
-    border: 3px solid rgba(0, 0, 0, .3);
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    cursor: pointer;
-}
-    .color-select-button:hover {
-        opacity: .5;
-    }
-
-.form-error-message {
-    padding: .5rem;
-    background-color: #ff0000;
-    color: #fff;
-    font-size: .8rem;
-}
-
+/* Note Card Loading Animation */
 .note-card-loading-anim {
     animation-name: notecardloadinganim;
     animation-duration: 1s;
@@ -247,18 +153,8 @@ input, textarea {
     .note-card-loading-anim div:last-child {
         width: 5rem;
     }
-
-.notes-loading-error {
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
-    height: 100vh;
-    color: #fff;
-    gap: 1rem;
-    text-align: center;
-    justify-content: center;
-}
     
+/* Animations */    
 @keyframes notecardloadinganim {
     0% {
 		background-position: 0% 50%;
@@ -278,4 +174,38 @@ input, textarea {
 
 @keyframes rotateanim {
     100% { transform: rotateZ(360deg); }
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 425px) {
+    .note-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem 0;
+        margin: 1rem;
+    }
+}
+
+@media screen and (min-width: 426px) and (max-width: 768px) {
+    .note-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem 2rem;
+        margin: 1rem;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .note-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem 2rem;
+        margin: 1rem;
+    }
+}
+
+@media screen and (min-width: 1441px) and (max-width: 2560px) {
+    .note-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 2rem 2rem;
+        margin: 1rem;
+    }
 }
