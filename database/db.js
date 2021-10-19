@@ -1,9 +1,8 @@
-require('dotenv').config();
-
 const Pool = require('pg').Pool;
 
 var pool;
 
+// Heroku or Local
 if (process.env.DATABASE_URL) {
     pool = new Pool({
         ssl: {
