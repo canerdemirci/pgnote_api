@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const notesTable = require('../database/models/notes');
+const notesCrud = require('../database/notesCrud');
+const noteModel = require('../database/models/note');
 
 function mapNote(note) {
     return {
@@ -16,7 +17,7 @@ router.get('/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
 
-        let note = await notesTable.get(id);
+        let note = await notesCrud.get(id);
 
         if (note)
             note = mapNote(note);
@@ -38,9 +39,9 @@ router.get('/', async (req, res, next) => {
         let notes = null;
 
         if (!like)
-            notes = await notesTable.getAll(limit, (page - 1) * limit);
+            notes = await notesCrud.getAll(limit, (page - 1) * limit);
         else
-            notes = await notesTable.search(like);
+            notes = await notesCrud.search(like);
 
         if (notes)
             notes = notes.map(n => mapNote(n));
@@ -59,7 +60,7 @@ router.post('/', async (req, res, next) => {
     const note = req.body;
 
     try {
-        let createdNote = await notesTable.create(note);
+        let createdNote = await notesCrud.create(note);
         
         if (createdNote)
             createdNote = mapNote(createdNote);
@@ -71,7 +72,7 @@ router.post('/', async (req, res, next) => {
     } catch (error) {
         console.error(error);
 
-        if (note.title.length > 150) {
+        if (note.title.length > noteModel.columns.title.maxLength) {
             return res.status(400).send('Title can be 150 characters maximum.');
         }
 
@@ -83,7 +84,7 @@ router.delete('/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
 
-        const result = await notesTable.delete(id);
+        const result = await notesCrud.delete(id);
 
         if (!result)
             return next();
@@ -99,7 +100,7 @@ router.put('/:id', async (req, res, next) => {
     try {
         const note = req.body;
 
-        const result = await notesTable.update(note);
+        const result = await notesCrud.update(note);
 
         if (!result)
             return next();
